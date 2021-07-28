@@ -1,4 +1,4 @@
-package io.github.bbang208.cleanarchitecture
+package io.github.bbang208.cleanarchitecture.di
 
 import dagger.Module
 import dagger.hilt.InstallIn

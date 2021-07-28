@@ -24,11 +24,14 @@ import java.util.regex.Pattern
  * Common class used by API responses.
  * @param <T> the type of the response object
 </T> */
+
+internal const val UNKNOWN_CODE = -1
+
 @Suppress("unused") // T is used in extending classes
 sealed class ApiResponse<T> {
     companion object {
-        fun <T> create(error: Throwable): ApiErrorResponse<T> {
-            return ApiErrorResponse(error.message ?: "unknown error")
+        fun <T> create(errorCode: Int, error: Throwable): ApiErrorResponse<T> {
+            return ApiErrorResponse(errorCode, error.message ?: "unknown error")
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
@@ -49,7 +52,7 @@ sealed class ApiResponse<T> {
                 } else {
                     msg
                 }
-                ApiErrorResponse(errorMsg ?: "unknown error")
+                ApiErrorResponse(response.code(), errorMsg ?: "unknown error")
             }
         }
     }
@@ -68,22 +71,6 @@ data class ApiSuccessResponse<T>(
         body = body,
         links = linkHeader?.extractLinks() ?: emptyMap()
     )
-
-    val nextPage: Int? by lazy(LazyThreadSafetyMode.NONE) {
-        links[NEXT_LINK]?.let { next ->
-            val matcher = PAGE_PATTERN.matcher(next)
-            if (!matcher.find() || matcher.groupCount() != 1) {
-                null
-            } else {
-                try {
-                    Integer.parseInt(matcher.group(1)!!)
-                } catch (ex: NumberFormatException) {
-                    Timber.w("cannot parse next page from %s", next)
-                    null
-                }
-            }
-        }
-    }
 
     companion object {
         private val LINK_PATTERN = Pattern.compile("<([^>]*)>[\\s]*;[\\s]*rel=\"([a-zA-Z0-9]+)\"")
@@ -106,4 +93,4 @@ data class ApiSuccessResponse<T>(
     }
 }
 
-data class ApiErrorResponse<T>(val errorMessage: String) : ApiResponse<T>()
+data class ApiErrorResponse<T>(val errorCode: Int, val errorMessage: String) : ApiResponse<T>()

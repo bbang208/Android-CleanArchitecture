@@ -25,14 +25,14 @@ import io.github.bbang208.cleanarchitecture.data.Status.LOADING
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */
-data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+data class Resource<out T>(val status: Status, val data: T?, val message: String?, val responseCode: Int? = null) {
     companion object {
         fun <T> success(data: T?): Resource<T> {
             return Resource(SUCCESS, data, null)
         }
 
-        fun <T> error(msg: String, data: T?): Resource<T> {
-            return Resource(ERROR, data, msg)
+        fun <T> error(msg: String, data: T?, errorCode: Int): Resource<T> {
+            return Resource(ERROR, data, msg, errorCode)
         }
 
         fun <T> loading(data: T?): Resource<T> {

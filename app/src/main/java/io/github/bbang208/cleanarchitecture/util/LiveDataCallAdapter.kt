@@ -18,6 +18,7 @@ package io.github.bbang208.cleanarchitecture.util
 
 import androidx.lifecycle.LiveData
 import io.github.bbang208.cleanarchitecture.data.ApiResponse
+import io.github.bbang208.cleanarchitecture.data.UNKNOWN_CODE
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Callback
@@ -46,7 +47,7 @@ class LiveDataCallAdapter<R>(private val responseType: Type) :
                         }
 
                         override fun onFailure(call: Call<R>, throwable: Throwable) {
-                            postValue(ApiResponse.create(throwable))
+                            postValue(ApiResponse.create(UNKNOWN_CODE, throwable))
                         }
                     })
                 }

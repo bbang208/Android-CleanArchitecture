@@ -1,5 +1,5 @@
 # Android-CleanArchitecture
-Android Clean Architecture Base App Project
+Android App Project Based Clean Architecture
 
 [![CircleCI](https://circleci.com/gh/bbang208/Android-CleanArchitecture/tree/master.svg?style=svg)](https://circleci.com/gh/bbang208/Android-CleanArchitecture/tree/master)
 
@@ -8,9 +8,11 @@ Android Architecture Component를 활용한 MVVM패턴 기반의 안드로이드
 
 ## Support Version
 Upper Android 6.0 Marshmallow (API Level 23)
+
 AGP Version: 7.0.0
+
 Gradle Version: 7.0.2
-<br>
+
 
 ## More Informations
 
@@ -26,6 +28,6 @@ Gradle Version: 7.0.2
 
 
 ### ETC
- - lang: 100$ Kotlin
+ - lang: 100% Kotlin
  - targetSDK: 31
  - DesignPattern: MVVM

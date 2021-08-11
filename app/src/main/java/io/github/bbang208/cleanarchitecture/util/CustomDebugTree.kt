@@ -5,10 +5,10 @@ import timber.log.Timber
 class CustomDebugTree : Timber.DebugTree() {
     override fun createStackElementTag(element: StackTraceElement): String {
         return String.format(
-            "[M:%s][%s:%s]",
-            element.methodName,
+            "[%s:%s][M:%s]",
             super.createStackElementTag(element),
-            element.lineNumber
+            element.lineNumber,
+            element.methodName
         )
     }
 }

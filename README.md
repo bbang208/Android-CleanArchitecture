@@ -3,6 +3,8 @@ Android App Project Based Clean Architecture
 
 [![CircleCI](https://circleci.com/gh/bbang208/Android-CleanArchitecture/tree/master.svg?style=svg)](https://circleci.com/gh/bbang208/Android-CleanArchitecture/tree/master)
 
+**This repository moved to https://github.com/bbang208/CleanArchitecture-Android**
+
 ## About
 Android Architecture Component를 활용한 MVVM패턴 기반의 안드로이드 앱 프로젝트입니다. Room + Paging은 지원하지 않습니다.
 
